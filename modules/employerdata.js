@@ -1,6 +1,7 @@
 var jobdb=require('../mongodb/jobcrud');
 const registrations = require('../mongodb/registrationemployer');
 const applicationform=require("../mongodb/applicationform");
+
 function jobPostExist(req, res, next){
     console.log("check");
     let id=req.params.id;
@@ -49,7 +50,6 @@ function listJobs(req, res, next){
     });
     
 }
-
 
 function applied(req, res, next){
         applicationform.find().exec(function (error, data) {

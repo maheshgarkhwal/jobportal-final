@@ -7,9 +7,10 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var employeerouter=require('./routes/employee');
+var employerrouter=require('./routes/employer');
 const mongoose = require('mongoose');
 const { createIndexes } = require('./mongodb/jobcrud');
-var employerrouter=require('./routes/employer')
+
 var app = express();
 mongoose.connect('mongodb://localhost/test', { useNewUrlParser: true });
 mongoose.set('useCreateIndex', true)
