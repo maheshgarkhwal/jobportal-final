@@ -49,7 +49,6 @@ function listJobs(req, res, next){
         }
         return res.status(200).send(`user updated :${id}`);
     });
-    
 }
 
 function applied(req, res, next){
