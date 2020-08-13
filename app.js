@@ -2,7 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var exphbs=require("express-handlebars")
+
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -14,9 +14,11 @@ var app = express();
 mongoose.connect('mongodb://localhost/test', { useNewUrlParser: true });
 mongoose.set('useCreateIndex', true)
 // view engine setup
-app.engine('handlebars',exphbs());
-app.set('', path.join(__dirname, 'views'));
-app.set('view engine', 'handlebars');
+
+app.set('views', path.join(__dirname, 'views'));
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'ejs');
+
 
 app.use(logger('dev'));
 app.use(express.json());
