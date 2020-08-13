@@ -20,7 +20,7 @@ mongoose.set('useCreateIndex', true)
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-ar storage=multer.diskStorage({
+var storage=multer.diskStorage({
   destination:function(req,file,cb){
     cb(null,'uploads');
   },
@@ -28,9 +28,6 @@ ar storage=multer.diskStorage({
 
     cb(null,file.fieldname+'-'+ path.extname(file.originalname));
   }
-})
-var upload=multer({
-  storage:storage
 })
 app.use(logger('dev'));
 app.use(express.json());
