@@ -63,27 +63,10 @@ const applicationform=async function(req,res,next){
 }
 
 
-nodemailer.SMTP = {
-   host: 'hhhh',
-   port: 25,
-   use_authentication: true,
-   user: 'email',
-   pass: 'somepasswd'
- };
 
-var message = {   
-      sender: "sender@domain.com",    
-      to:'somemail@somedomain.com',   
-      subject: '',    
-      html: '<h1>test</h1>',  
-     // attachments: [  
-      //{   
-        //  filename: "somepicture.jpg",    
-          //contents: new Buffer(data, 'base64'),   
-          //cid: cid    
-      //}   
-      //]   
-  };
+
+
+
 
 module.exports={
     updateprofile,

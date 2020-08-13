@@ -3,23 +3,35 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 
+var multer=require('multer');
+
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var employeerouter=require('./routes/employee');
+var employerrouter=require('./routes/employer');
 const mongoose = require('mongoose');
 const { createIndexes } = require('./mongodb/jobcrud');
-var employerrouter=require('./routes/employer')
+
 var app = express();
 mongoose.connect('mongodb://localhost/test', { useNewUrlParser: true });
 mongoose.set('useCreateIndex', true)
 // view engine setup
 
 app.set('views', path.join(__dirname, 'views'));
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'ejs');
+app.set('view engine', 'jade');
+ar storage=multer.diskStorage({
+  destination:function(req,file,cb){
+    cb(null,'uploads');
+  },
+  filename:function(req,file,cb){
 
-
+    cb(null,file.fieldname+'-'+ path.extname(file.originalname));
+  }
+})
+var upload=multer({
+  storage:storage
+})
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

@@ -1,11 +1,18 @@
 var express = require('express');
 var router = express.Router();
 var employer =require('../modules/employerdata');
+var data = require("../modules/data");
+var sendmail=require("../modules/mail");
 
 //employer
-router.post("/addjobs",employer.addJobs);
-router.get("/listjobs",employer.listJobs);
-router.put("/editjobs/:id",employer.jobPostExist,employer.editJobs);
-router.get("/filterjobs",employer.filterJobs);
-router.put("/updateprofile/:id",employer.updateprofile);
-router.get("/application",employer.applied)
+router.post("/addjobs",data.checkSession,employer.addJobs);
+router.get("/listjobs",data.checkSession,employer.listJobs);
+router.put("/editjobs/:id",data.checkSession,employer.jobPostExist,employer.editJobs);
+router.get("/filterjobs",data.checkSession,employer.filterJobs);
+router.put("/updateprofile/:id",data.checkSession,employer.updateprofile);
+router.get("/application",data.checkSession,employer.applied)
+
+//email
+router.post("/mail",sendmail.email);
+
+module.exports = router;
