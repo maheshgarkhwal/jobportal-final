@@ -28,9 +28,10 @@ var storage=multer.diskStorage({
 
     cb(null,file.fieldname+'-'+ path.extname(file.originalname));
   }
-})var upload=multer({
-  storage:storage
 })
+//var upload=multer({
+ // storage:storage
+//})
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -38,7 +39,7 @@ app.use(cookieParser());
 app.use('/public',express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-//app.use('/loginemployer',employerrouter);
+app.use('/loginemployer',employerrouter);
 app.use('/login',employeerouter);
 app.use('/users', usersRouter);
 

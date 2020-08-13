@@ -4,7 +4,8 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const myPlaintextPassword = 's0/\/\P4$$w0rD';
 var jwt = require('jsonwebtoken');
-var registrations=require("../mongodb/registrationemployer")
+var registrations=require("../mongodb/registrationemployer");
+const { Script } = require("vm");
 
 function checkSession(req, res, next) {
    
@@ -24,7 +25,9 @@ async function getEmployer(req, res) {
 
     var email = req.body.email;
     var password = req.body.password;
+    console.log(password);
     const user = await registrations.findOne({ email: email })
+    console.log(user)
     if (!user) {
         res.send(404, "no user found");
     }
@@ -32,6 +35,7 @@ async function getEmployer(req, res) {
         if (err) {
             res.send(404, "incmplete data");
         }
+        console.log(result)
         if (result == false) {
             return res.send("invalid email or id");
 
@@ -50,6 +54,7 @@ async function get(req, res) {
 
     var email = req.body.email;
     var password = req.body.password;
+    console.log("==================="+password);
     const user = await registration.findOne({ email: email })
     if (!user) {
         res.send(404, "no user found");
@@ -72,7 +77,7 @@ async function get(req, res) {
 }
 
 const logOut=async function(req,res,next){
-    res.redirect(login.html);
+    res.redirect("../views/login");
 }
 
 const createdata = async function (req, res, next) {
@@ -82,6 +87,7 @@ const createdata = async function (req, res, next) {
     var phoneno= req.body.phoneno;
     var address=req.body.address;
     var skills=req.body.skills;
+   
 
     bcrypt.hash(password, saltRounds, function (err, hash) {
         if (err) {
@@ -96,7 +102,7 @@ const createdata = async function (req, res, next) {
             skills:skills
 
         });
-        newUser.save().then(doc => res.send("resgistered")).catch(err => res.send(err));
+        newUser.save().then(doc => res.redirect("resgistered")).catch(err => res.send(err));
     });
 }
 const createdataEmployer = async function (req, res, next) {
@@ -106,7 +112,7 @@ const createdataEmployer = async function (req, res, next) {
     var phoneno= req.body.phoneno;
     var companyName=req.body.companyName;
  
-
+console.log(companyName)
     bcrypt.hash(password, saltRounds, function (err, hash) {
         if (err) {
             res.send(404,"data is not valid");
@@ -117,6 +123,7 @@ const createdataEmployer = async function (req, res, next) {
             password: hash,
             phoneno:phoneno,
             companyName:companyName,
+            
        
 
         });
