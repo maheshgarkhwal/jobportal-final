@@ -1,21 +1,24 @@
 var nodemailer = require('nodemailer');
+var jobdb=require('../mongodb/jobcrud');
 
 function email(req,res,next) {
 
     var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'mahesh.garkhal@gmail.com',
-        pass: 'kelltontechsolutions'
+        user: 'abc@gmail.com',
+        pass: '1234'
     }
     });
 
     var mailOptions = {
-    from: 'mahesh.garkhal@gmail.com',
-    to: 'mahesh.garkhwal@kelltontech.com',
+    from: 'abc@gmail.com',
+    to: 'xyz@gmail.com',
     subject: 'job',
-    text: `applied for jobs`
-        
+    text: `applied for jobs`,
+    attachments: [ 
+            { filename: 'abc.pdf', path: '../resume/abc.pdf' }
+        ]
     };
 
     transporter.sendMail(mailOptions, function(error, info){
