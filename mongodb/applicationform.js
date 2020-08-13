@@ -28,7 +28,7 @@ const formSchema=new mongoose.Schema({
 
         },
         experience:Number,
-        file:fileUpload
+        //file:fileUpload
 })
 
 const applicationForm=mongoose.model('applications', formSchema);
