@@ -44,11 +44,11 @@ const applicationform=async function(req,res,next){
     var phoneno= req.body.phoneno;
     var skills=req.body.skills;
     var experience=req.body.experience;
-    const file=req.file;
-    if(!file){
-        return res.send(400,"please upload a pdf");
+    //const file=req.file;
+   // if(!file){
+       // return res.send(400,"please upload a pdf");
   
-    }  
+ //   }  
 
     
         var newUser = new applicationForm({
@@ -57,7 +57,7 @@ const applicationform=async function(req,res,next){
             phoneno:phoneno,
             skills:skills,
             experience:experience,
-            file:file
+            //file:file
         });
         newUser.save().then(doc => res.send(doc)).catch(err => res.send(err));
 }
