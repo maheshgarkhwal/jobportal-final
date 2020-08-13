@@ -14,7 +14,7 @@ router.post('/login' ,validation,data.get);
 router.post('/loginEmployer' ,validation,data.getEmployer);
 router.post('/registration',data.createdata);
 router.post('/registrationEmployer',data.createdataEmployer);
-router.get('/logout',data.logOut);
+
 
 
 module.exports = router;

@@ -5,7 +5,8 @@ const registration=require("../mongodb/registration")
 const applicationForm = require('../mongodb/applicationform');
 
 async function updateprofile(req,res,next){
-    
+    var id=req.body.id;
+
    const data=req.body;
      var response=await registration.findByIdAndUpdate(id,data)
      
@@ -44,12 +45,7 @@ const applicationform=async function(req,res,next){
     var email = req.body.email;
     var phoneno= req.body.phoneno;
     var skills=req.body.skills;
-    var experience=req.body.experience;
-    //const file=req.file;
-   // if(!file){
-       // return res.send(400,"please upload a pdf");
-  
- //   }  
+    var experience=req.body.experience; 
 
     
         var newUser = new applicationForm({
@@ -58,10 +54,11 @@ const applicationform=async function(req,res,next){
             phoneno:phoneno,
             skills:skills,
             experience:experience,
-            //file:file
+          
         });
         newUser.save().then(doc => res.send(doc)).catch(err => res.send(err));
 }
+
 
 
 

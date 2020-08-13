@@ -42,7 +42,7 @@ async function getEmployer(req, res) {
         }
         else {
             var token = jwt.sign({ ...user, _id: user._id.toString() }, 'shhhhh',{expiresIn:'1h'});
-            return res.status(200).json({ message: "logged in sucessfully", token: token });
+            return res.status(200).json({ message: "logged in sucessfully", id:user._id,token: token });
 
         }
     })
@@ -54,7 +54,7 @@ async function get(req, res) {
 
     var email = req.body.email;
     var password = req.body.password;
-    console.log("==================="+password);
+   
     const user = await registration.findOne({ email: email })
     if (!user) {
         res.send(404, "no user found");
@@ -68,17 +68,15 @@ async function get(req, res) {
 
         }
         else {
-            var token = jwt.sign({ ...user, _id: user._id.toString() }, 'shhhhh',{expiresIn:'600'});
-            return res.status(200).json({ message: "logged in sucessfully", token: token });
+            var token = jwt.sign({ ...user, _id: user._id.toString() }, 'shhhhh',{expiresIn:'1h'});
+            return res.status(200).json({ message: "logged in sucessfully", id:user._id,token: token });
 
         }
     })
 
 }
 
-const logOut=async function(req,res,next){
-    res.redirect("../views/login");
-}
+
 
 const createdata = async function (req, res, next) {
     var name = req.body.name;
@@ -137,7 +135,6 @@ module.exports = {
     
     createdata,
     checkSession,
-    logOut,
     createdataEmployer,
     get,
     getEmployer
