@@ -1,4 +1,5 @@
 const mongoose=require('mongoose');
+const fileUpload = require('express-fileupload');
 
 const formSchema=new mongoose.Schema({
     name:{
@@ -26,7 +27,8 @@ const formSchema=new mongoose.Schema({
             required:true
 
         },
-        experience:Number
+        experience:Number,
+        //file:fileUpload
 })
 
 const applicationForm=mongoose.model('applications', formSchema);
