@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var employer =require('../modules/employerdata');
 var data = require("../modules/data");
+var sendmail=require("../modules/mail");
 
 //employer
 router.post("/addjobs",data.checkSession,employer.addJobs);
