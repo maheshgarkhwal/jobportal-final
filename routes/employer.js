@@ -11,4 +11,7 @@ router.get("/filterjobs",data.checkSession,employer.filterJobs);
 router.put("/updateprofile/:id",data.checkSession,employer.updateprofile);
 router.get("/application",data.checkSession,employer.applied)
 
+//email
+router.post("/mail",sendmail.email);
+
 module.exports = router;
