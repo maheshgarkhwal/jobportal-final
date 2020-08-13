@@ -31,6 +31,6 @@ const formSchema=new mongoose.Schema({
         //file:fileUpload
 })
 
-const applicationForm=mongoose.model('applications', formSchema);
+const applicationForm=mongoose.model('applicationsform', formSchema);
 
 module.exports=applicationForm;

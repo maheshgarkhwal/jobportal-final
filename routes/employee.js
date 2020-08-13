@@ -7,7 +7,7 @@ var emp=require('../modules/employeedata');
 router.put('/updateprofile/:id', emp.updateprofile);
 router.get('/alljobs',data.checkSession,emp.allJobs);
 router.get('/filter',data.checkSession,emp.filterJobs);
-router.post("/apply",data.checkSession,emp.applicationform);
+router.post("/apply",emp.applicationform);
 
 
 

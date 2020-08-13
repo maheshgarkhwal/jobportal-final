@@ -5,7 +5,7 @@ const registration=require("../mongodb/registration")
 const applicationForm = require('../mongodb/applicationform');
 
 async function updateprofile(req,res,next){
-    const id=req.params.id;
+    
    const data=req.body;
      var response=await registration.findByIdAndUpdate(id,data)
      
@@ -18,7 +18,8 @@ async function updateprofile(req,res,next){
 }
 async function allJobs(req,res,next){
     
-    const response=await jobcrud.find().size(10);
+    const response=await jobcrud.find();
+    console.log(response);
     if(!response){
         res.status(404).send("No Job post ");
     }
