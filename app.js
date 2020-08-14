@@ -28,7 +28,8 @@ var storage=multer.diskStorage({
 
     cb(null,file.fieldname+'-'+ path.extname(file.originalname));
   }
-})var upload=multer({
+})
+var upload=multer({
   storage:storage
 })
 app.use(logger('dev'));

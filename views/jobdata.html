@@ -1,20 +1,99 @@
 <html>
 <head>
+    <script> 
+        function loadjobs(){
+                var val=[  {
+            "_id": "5f3398d255b5ec33d0ef4d34",
+            "jobrole": "manager",
+            "experience": 2,
+            "location": "GGN",
+            "postedDate": "2-aug-2019",
+            "jobid": 1,
+            "__v": 0
+        },
+        {
+            "_id": "5f3399398f52c62d809aeda5",
+            "jobrole": "sr.manager",
+            "experience": 2,
+            "location": "doon",
+            "postedDate": "2-aug-2019",
+            "__v": 0
+        },
+        {
+            "_id": "5f3398d255b5ec33d0ef4d34",
+            "jobrole": "manager",
+            "experience": 2,
+            "location": "GGN",
+            "postedDate": "2-aug-2019",
+            "jobid": 1,
+            "__v": 0
+        },
+        {
+            "_id": "5f3399398f52c62d809aeda5",
+            "jobrole": "sr.manager",
+            "experience": 2,
+            "location": "doon",
+            "postedDate": "2-aug-2019",
+            "__v": 0
+        }
+    ]
+        
+        var data=document.getElementById('listjob');
+    
+        val.forEach((item)=>{
+          let str='<tr><td>'+item._id+'</td>'
+          +'<td>'+item.jobrole+'</td>'
+          +'<td>'+item.experience+'</td>'
+          +'<td>'+item.location+'</td>'
+          +'<td>'+item.postedDate+'</td></tr>'
+    
+          data.innerHTML+=str;
+        })
+    
+    
+        // fetch('http://localhost:3000/users/listjobs').then((res)=>{
+        // 		console.log(res);
+        // 	}).catch((error)=>{
+        // 		console.log(error);
+        // 	})
+    
+        // }
+        
+        function userAction() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+         if (this.readyState == 4 && this.status == 200) {
+             alert(this.responseText);
+         }
+    };
+    xhttp.open("GET", "localhost:3000/users/listjobs", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send("Your JSON Data Here");
+}
+    userAction();
+}
+        </script>
 </head>
 <body>
- <div><button type="button">list</button></div> <br>
- <div> <button type="button">edit</button></div> </br> 
- <button type="button" formaction="addupdate.html" >add</button> </br> <br>
- <button type="button">filter</button>
-<p align="right">   <button type="button" href="employerupdate.html">update profile</button> </p>
+ <div><button type="button" onclick="loadjobs()">list</button></div> <br>
+ <div> <form action="">
+    <input type="submit" value="edit" />
+</form> 
+<form action="addjob.html">
+    <input type="submit" value="add" />
+</form> </br> <br>
+<p align="right">   <form action="employeeupdate.html" align='right'>
+    <input type="submit" value="update profile" />
+</form>  </p>
 
- <p align="right"> <button type="button" >logout</button> </p>
+ <p align="right"> <form action="login.html" align="right">
+    <input type="submit" value="logout" />
+</form> </br> <br> </p>
  </br></br></br>
-    <table align="center">
+    <table align="center" border="2px">
     	<thead>
     		<tr>
     			<th>Code</th>
-    			<th>Company</th>
     			<th >job role</th>
     			<th >experience</th>
     			<th >location</th>
@@ -22,17 +101,10 @@
     			
     		</tr>
     	</thead>
-    	<tbody>
-    		<tr>
-    			<td>null</td>
-    			<td>null</td>
-    			<td >null</td>
-    			<td >null</td>
-    			<td >null</td>
-    			<td >null</td>
-   
-    		</tr>
+    	<tbody id='listjob'>
+    	
     	</tbody>
-    </table>
+	</table>
+	
  </body>					
 </html>
