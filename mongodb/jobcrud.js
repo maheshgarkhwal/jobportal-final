@@ -5,16 +5,10 @@ const jobSchema=new mongoose.Schema({
     experience:{type:String,required:true},
     location:{type:String,required:true},
 
-    email:{
-        type:String,
-        required:true,
-        index:{
-            unique:true
-            }
-        }
-
     postedDate:{type:Date,default:Date.now(),required:true},
    
+
+
 })
 
 const jobCRUD=mongoose.model('jobs', jobSchema);

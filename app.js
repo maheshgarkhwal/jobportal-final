@@ -32,31 +32,26 @@ app.get("/",function(req,res){
   res.sendFile(__dirname+"/application.html")
 })
 app.post("/",function(req,res){
-  console.log("hello");
+ 
   if(req.files){
-    console.log(req.files);
+   
     var file=req.files.myfile;
-   
-    console.log(file);
-   
-    myfile=file.name
-     
-    var resume = new pdffile({
-     
-     
-      pdf:file.name
-      });
-  resume.save().then(doc => res.send("applied")).catch(err => res.send(err));
+ 
+    myfile=file.name;
+  if(path.extname(file.name)=='.pdf'){
 
   file.mv("./upload/"+myfile,function(err){
     if(err){
       res.send(404,"not valid file");
 
     }
-   console.log("h")
+   res.send("applied");
   })
 }
-})
+else{
+  res.send(400,"upload pdf file only");
+
+}}})
 app.use('/', indexRouter);
 app.use('/employer',employerrouter);
 app.use('/employee',employeerouter);
