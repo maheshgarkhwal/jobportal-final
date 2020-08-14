@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var upload=require("express-fileupload")
 var pdffile=require("./mongodb/pdf")
-
+const helmet = require("helmet");
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -21,6 +21,7 @@ mongoose.set('useCreateIndex', true)
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+app.use(helmet());
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -57,8 +58,8 @@ app.post("/",function(req,res){
 }
 })
 app.use('/', indexRouter);
-app.use('/loginemployer',employerrouter);
-app.use('/loginemployee',employeerouter);
+app.use('/employer',employerrouter);
+app.use('/employee',employeerouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler

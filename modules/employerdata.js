@@ -22,22 +22,24 @@ async function updateprofile(req,res,next){
      }
 }
 async function addJobs(req, res, next){
-        let jobdetails = req.body;
-        let job = new jobdb(jobdetails);
-        await job.save(); 
+    let jobrole= req.body.jobrole;
+    let experience = req.body.experience;
+    let location= req.body.location;
+        let postedDate = req.body.postedDate;
+        let job =await new jobdb({
+        
+            jobrole:jobrole,
+experience:experience,
+location:location,
+postedDate:postedDate,
+        
+});
+         job.save(); 
         res.status(200).send(`job added`);
         res.end();
 }
 
-function listJobs(req, res, next){
-    jobdb.find().exec(function (error, data) {
-        if (error) 
-        return res.status(500).send("internal server error");
 
-        res.status(200).send(data);
-        res.end();
-    });
-}
 
  function editJobs(req, res, next){
     let jobdetails = req.body;
@@ -71,14 +73,16 @@ async function filterJobs(req, res, next){
     jobdb.find(skill).exec(function (error, data) {
         if (error) 
         return res.status(500).send("internal server error");
-
+if(!data){
+    return res.status(404).send("no job post")
+}
         return res.status(200).send(data);
     });
 }
 
 module.exports={
     addJobs,
-    listJobs,
+   
     editJobs,
     filterJobs,
     jobPostExist,

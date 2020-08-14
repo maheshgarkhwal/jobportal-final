@@ -27,7 +27,8 @@ const formSchema=new mongoose.Schema({
             required:true
 
         },
-        experience:Number,
+        experience:String,
+        jobpost:String
         //file:fileUpload
     
 })
