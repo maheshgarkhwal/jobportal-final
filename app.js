@@ -28,21 +28,21 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/public',express.static(path.join(__dirname, 'public')));
 app.get("/",function(req,res){
-  res.sendFile(__dirname+"/pdf.html")
+  res.sendFile(__dirname+"/application.html")
 })
 app.post("/",function(req,res){
   console.log("hello");
   if(req.files){
     console.log(req.files);
     var file=req.files.myfile;
-    var email=req.body.email;
+   
     console.log(file);
    
     myfile=file.name
      
     var resume = new pdffile({
      
-      email: email,
+     
       pdf:file.name
       });
   resume.save().then(doc => res.send("applied")).catch(err => res.send(err));
@@ -52,7 +52,7 @@ app.post("/",function(req,res){
       res.send(404,"not valid file");
 
     }
-    res.send("done");
+   console.log("h")
   })
 }
 })

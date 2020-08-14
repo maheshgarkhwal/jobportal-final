@@ -14,18 +14,25 @@
               
               
               <label for="phoneno"><b>Phoneno</b></label>
-              <input type="phoneno" placeholder="Enter number" name="phoneno" required>
+              <input type="number" placeholder="Enter number" name="phoneno" required>
               <br>
               <label for="experience"><b>Experience</b></label>
-              <input type="experience" placeholder="Enter address" name="experience" required>
+              <input type="number" placeholder="Enter address" name="experience" required>
               <br>
               <label for="skills"><b>skills</b></label>
-              <input type="skills" placeholder="Enter skills" name="skills" required>
+              <input type="text" placeholder="Enter skills" name="skills" required>
               <br>
        
-        
-      
+       
+              <input type="submit"/>
     </div>
-    <div>
-      <button>Submit</button>
-    </div>
+   
+  </form>
+ 
+   
+   <form action="http://localhost:3000" enctype="multipart/form-data" method="POST"> 
+    <input type="file" name="myfile" accept=".pdf"/>
+  <input type="submit"/>
+    
+  
+ </form>     </body>
