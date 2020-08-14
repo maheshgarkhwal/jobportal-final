@@ -5,11 +5,14 @@ const registration=require("../mongodb/registration")
 const applicationForm = require('../mongodb/applicationform');
 
 async function updateprofile(req,res,next){
-    var id=req.body.id;
+    var userid=req.params.id;
 
    const data=req.body;
-     var response=await registration.findByIdAndUpdate(id,data)
-     
+   console.log(userid,data);
+     var response=await registration.findByIdAndUpdate(userid,data);
+     console.log(response);
+    
+    
      if(!response){
          res.status(400).send("login again");
      }

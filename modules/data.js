@@ -97,10 +97,10 @@ const createdata = async function (req, res, next) {
             password: hash,
             phoneno:phoneno,
             address:address,
-            skills:skills
+            skills:skills,
 
         });
-        newUser.save().then(doc => res.redirect("resgistered")).catch(err => res.send(err));
+        newUser.save().then(doc => res.send("resgistered")).catch(err => res.send("error"));
     });
 }
 const createdataEmployer = async function (req, res, next) {
