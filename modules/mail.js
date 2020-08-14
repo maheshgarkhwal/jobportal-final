@@ -1,24 +1,30 @@
 var nodemailer = require('nodemailer');
 var jobdb=require('../mongodb/jobcrud');
+const { getMaxListeners } = require('../mongodb/jobcrud');
 
-function email(req,res,next) {
+async function email(req,res,next) {
+    let id=req.params.id;
+    let emp=await jobdb.findById({_id: id}).exec(); 
+    let email=emp.email;
+    console.log(emp);
 
     var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: 'abc@gmail.com',
-        pass: '1234'
-    }
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
+        auth: {
+            user: 'mahesh.garkhwal@gmail.com',
+            pass: 'kelltontechsolutions'
+        }
     });
 
     var mailOptions = {
-    from: 'abc@gmail.com',
-    to: 'xyz@gmail.com',
-    subject: 'job',
-    text: `applied for jobs`,
-    attachments: [ 
-            { filename: 'abc.pdf', path: '../resume/abc.pdf' }
-        ]
+        to: email,
+        subject: 'job',
+        text: `applied for jobs`,
+        attachments: [ 
+                { filename: 'abc.pdf', path: __dirname+'/resume/abc.pdf' }
+            ]
     };
 
     transporter.sendMail(mailOptions, function(error, info){
@@ -32,7 +38,6 @@ function email(req,res,next) {
 
 
 
-// }
 module.exports = {
     email
 }
