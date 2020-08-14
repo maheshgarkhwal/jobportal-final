@@ -16,7 +16,7 @@ const formSchema=new mongoose.Schema({
         },
     
         phoneno:{
-            type:String,
+            type:Number,
             required:true,
             index:{
                 unique:true
@@ -29,8 +29,9 @@ const formSchema=new mongoose.Schema({
         },
         experience:Number,
         //file:fileUpload
+    
 })
 
-const applicationForm=mongoose.model('applications', formSchema);
+const applicationForm=mongoose.model('applicationsform', formSchema);
 
 module.exports=applicationForm;

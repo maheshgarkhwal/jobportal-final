@@ -2,14 +2,13 @@
 <head>
 </head>
 <body>
- <div><button type="button">list</button></div> <br>
+ <div><form action="http://localhost:3000/loginemployer/listjobs" method="GET"><button type="button">list</button></div></form> <br>
  <div> <button type="button">edit</button></div> </br> 
  <button type="button" formaction="addupdate.html" >add</button> </br> <br>
  <button type="button">filter</button>
 <p align="right">   <button type="button" href="employerupdate.html">update profile</button> </p>
 
- <p align="right"> <button type="button" >logout</button> </p>
- </br></br></br>
+ </br>
     <table align="center">
     	<thead>
     		<tr>
@@ -23,16 +22,16 @@
     		</tr>
     	</thead>
     	<tbody>
-    		<tr>
-    			<td>null</td>
-    			<td>null</td>
-    			<td >null</td>
-    			<td >null</td>
-    			<td >null</td>
-    			<td >null</td>
-   
-    		</tr>
+    		
     	</tbody>
     </table>
- </body>					
+ </body>	<script type = "text/javascript">
+   
+	function Redirect() {
+	   window.location = "login.html";
+	}
+
+</script>
+<form  >
+<button type=button onclick="Redirect()">logout</button></form>				
 </html>

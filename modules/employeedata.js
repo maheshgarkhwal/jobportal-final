@@ -5,10 +5,14 @@ const registration=require("../mongodb/registration")
 const applicationForm = require('../mongodb/applicationform');
 
 async function updateprofile(req,res,next){
-    const id=req.params.id;
+    var userid=req.params.id;
+
    const data=req.body;
-     var response=await registration.findByIdAndUpdate(id,data)
-     
+   console.log(userid,data);
+     var response=await registration.findByIdAndUpdate(userid,data);
+     console.log(response);
+    
+    
      if(!response){
          res.status(400).send("login again");
      }
@@ -18,7 +22,8 @@ async function updateprofile(req,res,next){
 }
 async function allJobs(req,res,next){
     
-    const response=await jobcrud.find().size(10);
+    const response=await jobcrud.find();
+    console.log(response);
     if(!response){
         res.status(404).send("No Job post ");
     }
@@ -43,12 +48,7 @@ const applicationform=async function(req,res,next){
     var email = req.body.email;
     var phoneno= req.body.phoneno;
     var skills=req.body.skills;
-    var experience=req.body.experience;
-    //const file=req.file;
-   // if(!file){
-       // return res.send(400,"please upload a pdf");
-  
- //   }  
+    var experience=req.body.experience; 
 
     
         var newUser = new applicationForm({
@@ -57,10 +57,11 @@ const applicationform=async function(req,res,next){
             phoneno:phoneno,
             skills:skills,
             experience:experience,
-            //file:file
+          
         });
         newUser.save().then(doc => res.send(doc)).catch(err => res.send(err));
 }
+
 
 
 

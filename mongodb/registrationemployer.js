@@ -36,7 +36,7 @@ var employer=new Schema({
         },
     });
 
-var registrations=mongoose.model('registrationEmployer',employer);
+var registrations=mongoose.model('employerregistration',employer);
 
 
 
