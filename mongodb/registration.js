@@ -42,7 +42,7 @@ var employee=new Schema({
         
 });
 
-var registration=mongoose.model('registration',employee);
+var registration=mongoose.model('registrationemployee',employee);
 
 
 

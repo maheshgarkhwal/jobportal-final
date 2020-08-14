@@ -2,9 +2,9 @@ const mongoose=require('mongoose');
 
 const jobSchema=new mongoose.Schema({
     jobrole:{type:String,required:true},
-    experience:Number,
+    experience:{type:String,required:true},
     location:{type:String,required:true},
-    postedDate:{type:String,required:true},
+
     email:{
         type:String,
         required:true,
@@ -12,6 +12,9 @@ const jobSchema=new mongoose.Schema({
             unique:true
             }
         }
+
+    postedDate:{type:Date,default:Date.now(),required:true},
+   
 })
 
 const jobCRUD=mongoose.model('jobs', jobSchema);

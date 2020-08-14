@@ -1,33 +1,38 @@
-<form method="post" enctype="multipart/form-data" action="http://localhost:3000/login/apply">
+<form method="POST"  action="http://localhost:3000/loginemployee/apply">
     <div><html>
 
         
               <p>Please fill in this form.</p>
               <hr>
-              <label for="Name"><b>Name</b></label>
-              <input type="text" placeholder="Enter Name" name="Name" id="Name" >
+              <label for="name"><b>Name</b></label>
+              <input type="text" placeholder="Enter Name" name="name" id="name" required>
           
              <br>
               <label for="email"><b>Email</b></label>
-              <input type="text" placeholder="Enter Email" name="email" id="email">
+              <input type="text" placeholder="Enter Email" name="email" id="email" required>
               <br>
               
               
               <label for="phoneno"><b>Phoneno</b></label>
-              <input type="phoneno" placeholder="Enter number" name="phoneno" >
+              <input type="number" placeholder="Enter number" name="phoneno" required>
               <br>
-              <label for="adress"><b>Address</b></label>
-              <input type="adress" placeholder="Enter address" name="address" >
+              <label for="experience"><b>Experience</b></label>
+              <input type="number" placeholder="Enter address" name="experience" required>
               <br>
               <label for="skills"><b>skills</b></label>
-              <input type="skills" placeholder="Enter skills" name="skills" >
+              <input type="text" placeholder="Enter skills" name="skills" required>
               <br>
        
-        
-      <label for="resume">Choose file to upload</label>
-      <input type="file" id="resume" name="resume"
-          accept=".pdf">
+       
+              <input type="submit"/>
     </div>
-    <div>
-      <button>Submit</button>
-    </div>
+   
+  </form>
+ 
+   
+   <form action="http://localhost:3000" enctype="multipart/form-data" method="POST"> 
+    <input type="file" name="myfile" accept=".pdf"/>
+  <input type="submit"/>
+    
+  
+ </form>     </body>
