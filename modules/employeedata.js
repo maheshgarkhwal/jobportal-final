@@ -7,7 +7,7 @@ const { query } = require('express');
 const { db } = require('../mongodb/registration');
 
 async function updateprofile(req, res, next) {
-    var userid = req.params.id;
+    var userid=localStorage.getItem('id');
 
     const data = req.body;
     console.log(userid, data);

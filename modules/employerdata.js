@@ -69,8 +69,8 @@ function applied(req, res, next){
 
 
 async function filterJobs(req, res, next){
-    let skill=req.query;
-    jobdb.find(skill).exec(function (error, data) {
+    
+    jobdb.find().exec(function (error, data) {
         if (error) 
         return res.status(500).send("internal server error");
 if(!data){

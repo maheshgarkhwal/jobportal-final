@@ -6,7 +6,9 @@ const myPlaintextPassword = 's0/\/\P4$$w0rD';
 var jwt = require('jsonwebtoken');
 var registrations=require("../mongodb/registrationemployer");
 const { Script } = require("vm");
-
+var path=require("path");
+var {LocalStorage}=require('node-localstorage')
+localStorage=new LocalStorage('./scratch')
 function checkSession(req, res, next) {
    
 
@@ -21,11 +23,11 @@ function checkSession(req, res, next) {
         res.status(401).send("invalid token");
     }
 }
-async function getEmployer(req, res) {
+async function loginemployer(req, res) {
 
     var email = req.body.email;
     var password = req.body.password;
-    console.log(password);
+   
     const user = await registrations.findOne({ email: email })
     console.log(user)
     if (!user) {
@@ -35,14 +37,16 @@ async function getEmployer(req, res) {
         if (err) {
             res.send(404, "incmplete data");
         }
-        console.log(result)
+       
         if (result == false) {
             return res.send("invalid email or id");
 
         }
         else {
             var token = jwt.sign({ ...user, _id: user._id.toString() }, 'shhhhh',{expiresIn:'1h'});
-            return res.status(200).json({ message: "logged in sucessfully", id:user._id,token: token });
+       
+        localStorage.setItem('_id',id);
+            return res.sendFile(path.join(__dirname,'..','/views/dashboardemployer.html'));
 
         }
     })
@@ -50,11 +54,11 @@ async function getEmployer(req, res) {
 }
 
 
-async function get(req, res) {
+async function loginemployee(req, res) {
 
     var email = req.body.email;
     var password = req.body.password;
-   
+   console.log("++++++++++++++++++++++++++++++++++"+password)
     const user = await registration.findOne({ email: email })
     if (!user) {
         res.send(404, "no user found");
@@ -69,7 +73,10 @@ async function get(req, res) {
         }
         else {
             var token = jwt.sign({ ...user, _id: user._id.toString() }, 'shhhhh',{expiresIn:'1h'});
-            return res.status(200).json({ message: "logged in sucessfully", id:user._id,token: token });
+            localStorage.setItem('token',token);
+         res.send(token)
+            
+            //return //res.sendFile(path.join(__dirname,'..','/views/dashboardemployee.html'));
 
         }
     })
@@ -78,7 +85,8 @@ async function get(req, res) {
 
 
 
-const createdata = async function (req, res, next) {
+const registeremployee = async function (req, res, next) {
+    var filepath=path.join(__dirname,'..','/views/login.html');
     var name = req.body.name;
     var email = req.body.email;
     var password = req.body.password;
@@ -100,10 +108,13 @@ const createdata = async function (req, res, next) {
             skills:skills,
 
         });
-        newUser.save().then(doc => res.send("resgistered")).catch(err => res.send("error"));
+        id=newUser._id;
+    localStorage.setItem('id',id)
+        newUser.save().then(doc => res.sendFile(filepath ) ).catch(err => res.status(404).json({message:"data is not valid"}));
     });
 }
-const createdataEmployer = async function (req, res, next) {
+const registeremployer = async function (req, res, next) {
+    var filepath=path.join(__dirname,'..','/views/loginemployer.html');
     var name = req.body.name;
     var email = req.body.email;
     var password = req.body.password;
@@ -125,7 +136,7 @@ console.log(companyName)
        
 
         });
-        newUser.save().then(doc => res.send("resgistered")).catch(err => res.send(err));
+        newUser.save().then(doc => res.sendFile(filepath)).catch(err => res.send(err));
     });
 }
 
@@ -133,11 +144,11 @@ console.log(companyName)
 
 module.exports = {
     
-    createdata,
+    registeremployee,
     checkSession,
-    createdataEmployer,
-    get,
-    getEmployer
+    registeremployer,
+    loginemployee,
+    loginemployer
 
 
 }

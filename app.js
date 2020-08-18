@@ -12,8 +12,9 @@ var employeerouter=require('./routes/employee');
 var employerrouter=require('./routes/employer');
 const mongoose = require('mongoose');
 const { createIndexes } = require('./mongodb/jobcrud');
-
+const passport=require("passport")
 var app = express();
+const ignoreFavicon=require('favicon')
 app.use(upload());
 mongoose.connect('mongodb://localhost/test', { useNewUrlParser: true });
 mongoose.set('useCreateIndex', true)
@@ -21,6 +22,7 @@ mongoose.set('useCreateIndex', true)
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
 app.use(helmet());
 
 app.use(logger('dev'));
@@ -28,9 +30,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/public',express.static(path.join(__dirname, 'public')));
-app.get("/",function(req,res){
-  res.sendFile(__dirname+"/application.html")
-})
+
 app.post("/",function(req,res){
  
   if(req.files){
@@ -53,6 +53,7 @@ else{
 
 }}})
 app.use('/', indexRouter);
+
 app.use('/employer',employerrouter);
 app.use('/employee',employeerouter);
 app.use('/users', usersRouter);

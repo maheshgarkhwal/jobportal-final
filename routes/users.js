@@ -1,6 +1,7 @@
 var express = require('express');
 var data = require("../modules/data");
 var router = express.Router();
+
 function validation(req,res,next){
     var email = req.body.email;
     var password = req.body.password;
@@ -10,10 +11,11 @@ function validation(req,res,next){
       next();
 }
 
-router.post('/login' ,validation,data.get);
-router.post('/loginEmployer' ,validation,data.getEmployer);
-router.post('/registration',data.createdata);
-router.post('/registrationEmployer',data.createdataEmployer);
+
+router.post('/login' ,validation, data.loginemployee);
+router.post('/loginEmployer' ,validation, data.loginemployer);
+router.post('/registration',data.registeremployee);
+router.post('/registrationEmployer',data.registeremployer);
 
 
 

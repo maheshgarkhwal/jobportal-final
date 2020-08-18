@@ -4,7 +4,10 @@ var router = express.Router();
 var multer=require('multer');
 var emp=require('../modules/employeedata');
 var mail=require("../modules/mail");
-router.put('/updateprofile/:id',data.checkSession, emp.updateprofile);
+
+
+
+router.put('/updateprofile',data.checkSession, emp.updateprofile);
 router.get('/filter',data.checkSession,emp.filterJobs);
 router.post("/apply",data.checkSession,emp.applicationform);
 
