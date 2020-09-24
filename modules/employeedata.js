@@ -66,8 +66,8 @@ const applicationform = async function (req, res, next) {
             port: 465,
             secure: true,
             auth: {
-                user: '704priyankamehta@gmail.com',
-                pass: 'piya19117'
+                user: '@@@@@',
+                pass: '%%%%%'
             }
         });
     
