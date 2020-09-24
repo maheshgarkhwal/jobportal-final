@@ -1,16 +1,10 @@
 var express = require('express');
 var data = require("../modules/data");
 var router = express.Router();
-var multer=require('multer');
 var emp=require('../modules/employeedata');
-var mail=require("../modules/mail");
 
-
-
-router.put('/updateprofile',data.checkSession, emp.updateprofile);
+router.put('/updateprofile',data.checkSession,emp.updateprofile);
 router.get('/filter',data.checkSession,emp.filterJobs);
-router.post("/apply",data.checkSession,emp.applicationform);
-
-router.post("/mail/:id",mail.email);
+router.post("/apply/:id",data.checkSession,emp.applicationform);
 
 module.exports = router;

@@ -11,7 +11,7 @@ function jobPostExist(req, res, next){
       next();
 }
 async function updateprofile(req,res,next){
-    const empId=req.params.id;
+    const empId=req.user.id;
    const data=req.body;
      var response=await registrations.findByIdAndUpdate(empId,data)
      if(!response){
@@ -25,6 +25,7 @@ async function addJobs(req, res, next){
     let jobrole= req.body.jobrole;
     let experience = req.body.experience;
     let location= req.body.location;
+    let email=req.body.email
         let postedDate = req.body.postedDate;
         let job =await new jobdb({
         
@@ -32,6 +33,7 @@ async function addJobs(req, res, next){
 experience:experience,
 location:location,
 postedDate:postedDate,
+email:email
         
 });
          job.save(); 

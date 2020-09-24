@@ -11,7 +11,6 @@ function validation(req,res,next){
       next();
 }
 
-
 router.post('/login' ,validation, data.loginemployee);
 router.post('/loginEmployer' ,validation, data.loginemployer);
 router.post('/registration',data.registeremployee);

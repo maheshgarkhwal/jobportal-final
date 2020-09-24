@@ -10,17 +10,13 @@ const formSchema=new mongoose.Schema({
     email:{
         type:String,
         required:true,
-        index:{
-            unique:true
-            }
+        
         },
     
         phoneno:{
             type:Number,
             required:true,
-            index:{
-                unique:true
-                }
+            
         },
         skills:{
             type:String,
@@ -29,7 +25,7 @@ const formSchema=new mongoose.Schema({
         },
         experience:String,
         jobpost:String
-        //file:fileUpload
+       
     
 })
 

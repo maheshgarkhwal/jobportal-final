@@ -12,16 +12,30 @@ var employeerouter=require('./routes/employee');
 var employerrouter=require('./routes/employer');
 const mongoose = require('mongoose');
 const { createIndexes } = require('./mongodb/jobcrud');
-const passport=require("passport")
+
 var app = express();
-const ignoreFavicon=require('favicon')
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger');
+ 
+var options = {
+  explorer: true
+};
+ 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
+
 app.use(upload());
-mongoose.connect('mongodb://localhost/test', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/mydata', { useNewUrlParser: true ,useUnifiedTopology:true});
 mongoose.set('useCreateIndex', true)
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log("connection established");
+})
 // view engine setup
 
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 
 app.use(helmet());
 
@@ -31,27 +45,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/public',express.static(path.join(__dirname, 'public')));
 
-app.post("/",function(req,res){
- 
-  if(req.files){
-   
-    var file=req.files.myfile;
- 
-    myfile=file.name;
-  if(path.extname(file.name)=='.pdf'){
 
-  file.mv("./upload/"+myfile,function(err){
-    if(err){
-      res.send(404,"not valid file");
-
-    }
-   res.send("applied");
-  })
-}
-else{
-  res.send(400,"upload pdf file only");
-
-}}})
 app.use('/', indexRouter);
 
 app.use('/employer',employerrouter);
